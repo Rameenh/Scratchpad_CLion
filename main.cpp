@@ -23,33 +23,31 @@ void print_queue(queue<int> q) {
     cout << endl;
 }
 
+bool arrayContains(int test[][2], int b, int length) {
+    for (int i = 0; i < length; i++) {
+        if (test[i][0] == b) return true;
+    }
+    return false;
+}
+
 int main() {
 
-    queue<int> FIFOqueue;
-    int queueSize = 0;
-    FIFOqueue.push(2);
-    FIFOqueue.push(3);
-    FIFOqueue.pop();
-    FIFOqueue.push(2);
-    FIFOqueue.push(1);
-    print_queue(FIFOqueue);
-    FIFOqueue.pop();
-    FIFOqueue.push(5);
-    print_queue(FIFOqueue);
-    FIFOqueue.pop();
-    FIFOqueue.push(2);
-    FIFOqueue.pop();
-    FIFOqueue.push(4);
-    print_queue(FIFOqueue);
-    FIFOqueue.pop();
-    FIFOqueue.push(5);
-    FIFOqueue.pop();
-    FIFOqueue.push(3);
-    print_queue(FIFOqueue);
-    FIFOqueue.pop();
-    FIFOqueue.push(2);
-    print_queue(FIFOqueue);
-    FIFOqueue.pop();
-    FIFOqueue.push(5);
+    int n = 3;
+    int test[n][2];
+    int length = sizeof(test) / sizeof(test[0]);
+    test[0][0] = 2;
+    test[0][1] = 1;
+    test[1][0] = 6;
+    test[0][1] = 1;
+    test[2][0] = 4;
+    test[0][1] = 1;
+
+    cout << arrayContains(test, 2, length) << endl; //should return 1
+    cout << arrayContains(test, 6, length) << endl; //should return 1
+    cout << arrayContains(test, 4, length) << endl; //should return 1
+    cout << arrayContains(test, 1, length) << endl; //should return 0
+    cout << arrayContains(test, 10, length) << endl; //should return 0
+    cout << arrayContains(test, 8, length) << endl; //should return 0
+    cout << arrayContains(test, 14, length); //should return 0
     return 0;
 }
