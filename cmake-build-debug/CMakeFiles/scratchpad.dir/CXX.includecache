@@ -9,10 +9,6 @@
 /cygdrive/c/Users/Rameen/CLionProjects/scratchpad/main.cpp
 iostream
 -
-chrono
--
-random
--
-time.h
+queue
 -
 
