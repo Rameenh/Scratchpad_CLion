@@ -30,24 +30,36 @@ bool arrayContains(int test[][2], int b, int length) {
     return false;
 }
 
+int arrayContainsWithIndex(int test[][2], int b, int length) {
+    int whereIs;
+    for (int i = 0; i < length; i++) {
+        if (test[i][0] == b) {
+            whereIs = i;
+        }
+    }
+    return whereIs;
+}
+
+int tempFunc(int n) {
+    return n * 2;
+}
+
+template<typename T, size_t size>
+void print(const T (&array)[size]) {
+    for (size_t i = 0; i < size; ++i)
+        std::cout << array[i] << " ";
+}
+
+
 int main() {
 
-    int n = 3;
-    int test[n][2];
-    int length = sizeof(test) / sizeof(test[0]);
-    test[0][0] = 2;
-    test[0][1] = 1;
-    test[1][0] = 6;
-    test[0][1] = 1;
-    test[2][0] = 4;
-    test[0][1] = 1;
+    int tempArray[20];
 
-    cout << arrayContains(test, 2, length) << endl; //should return 1
-    cout << arrayContains(test, 6, length) << endl; //should return 1
-    cout << arrayContains(test, 4, length) << endl; //should return 1
-    cout << arrayContains(test, 1, length) << endl; //should return 0
-    cout << arrayContains(test, 10, length) << endl; //should return 0
-    cout << arrayContains(test, 8, length) << endl; //should return 0
-    cout << arrayContains(test, 14, length); //should return 0
+    for (int n = 0; n < 20; n++) {
+        tempArray[n] = tempFunc(n);
+    }
+
+    print(tempArray);
+
     return 0;
 }
