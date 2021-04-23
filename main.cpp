@@ -50,16 +50,28 @@ void print(const T (&array)[size]) {
         std::cout << array[i] << " ";
 }
 
+int intArraySum(int array[], int length) {
+    int sum = 0;
+
+    for (int i = 0; i < length; i++) {
+        sum += array[i];
+    }
+
+    return sum;
+}
 
 int main() {
 
-    int tempArray[20];
+    int tempArray[5];
 
-    for (int n = 0; n < 20; n++) {
+    for (int n = 0; n < 5; n++) {
         tempArray[n] = tempFunc(n);
     }
 
+    int length = sizeof(tempArray) / sizeof(tempArray[0]);
+
     print(tempArray);
+    cout << endl << intArraySum(tempArray, length);
 
     return 0;
 }
