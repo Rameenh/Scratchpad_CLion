@@ -11,4 +11,12 @@ iostream
 -
 queue
 -
+sstream
+-
+stack
+-
+cstdlib
+-
+vector
+-
 
