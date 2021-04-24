@@ -146,8 +146,32 @@ int LRU(int wss, int pageNumbers[]) {
             }
         } else {
             cout << "since queue contains the page number, rejuvenating\n";
-            LRUqueue.pop(); //we are "rejuvenating" or "refreshing" the old repeated page number
-            LRUqueue.push(pageNumbers[i]); //this algorithm is the same as FIFO except
+            int pageNumIndex = LRUqueue.size() - queueContainsIndex(LRUqueue, pageNumbers[i]);
+            vector<int> queueTempFH;
+            vector<int> queueTempSH;
+
+            for (int i = 0; i < pageNumIndex; i++) {
+                queueTempFH.push_back(LRUqueue.front());
+                LRUqueue.pop();
+            }
+            LRUqueue.pop(); //this is the page number we're moving to the front
+
+            int sizeForSH = LRUqueue.size();
+
+            for (int i = 0; i < sizeForSH; i++) {
+                queueTempSH.push_back(LRUqueue.front());
+                LRUqueue.pop();
+            }
+
+            for (int i = 0; i < queueTempFH.size(); i++) {
+                LRUqueue.push(queueTempFH.at(i));
+            }
+
+            for (int i = 0; i < queueTempSH.size(); i++) {
+                LRUqueue.push(queueTempSH.at(i));
+            }
+
+            LRUqueue.push(pageNumbers[i]);
         }
         cout << "new queue: [";
         print_queue(LRUqueue);
@@ -169,61 +193,21 @@ int intArraySum(int array[], int length) {
     return sum;
 }
 
+void printVector(std::vector<int> const &a) {
+    for (int i = 0; i < a.size(); i++)
+        std::cout << a.at(i) << ' ';
+}
+
 int main() {
     bool t = true;
     bool f = false;
     cout << boolalpha << endl;
-/*
+
     int pageAddr[] = {2, 3, 2, 1, 5, 2, 4, 5, 3, 2, 5, 2};
     int wss = 3;
 
     LRU(wss, pageAddr);
-*/
-    queue<int> test;
-    test.push(5);
-    test.push(0);
-    test.push(4);
-    test.push(11);
-    test.push(6);
-    test.push(7);
-    test.push(8);
-    test.push(1);
-    test.push(3);
-    print_queue(test);
 
-    int x = test.size() - queueContainsIndex(test, 3);
-    vector<int> queueTempFH;
-    vector<int> queueTempSH;
 
-    for (int i = 0; i < x; i++) {
-        queueTempFH.push_back(test.front());
-        test.pop();
-    }
-    cout << endl << "first half of vector: ";
-    for (int i = 0; i < queueTempFH.size(); i++)
-        cout << queueTempFH[i] << ' ';
-
-    test.pop(); //save the middle element in another variable
-    int tempPage = 3;
-
-    int sizeForSH = test.size();
-    for (int i = 0; i < sizeForSH; i++) {
-        queueTempSH.push_back(test.front());
-        test.pop();
-    }
-
-    cout << "second half of vector: ";
-    for (int i = 0; i < queueTempSH.size(); i++)
-        cout << queueTempSH[i] << ' ';
-
-    //reassembly
-    test.push(tempPage);
-    for (int i = 0; i < queueTempFH.size(); i++)
-        test.push(queueTempFH.at(i));
-    for (int i = 0; i < queueTempSH.size(); i++)
-        test.push(queueTempSH.at(i));
-
-    cout << endl;
-    print_queue(test);
     return 0;
 }
